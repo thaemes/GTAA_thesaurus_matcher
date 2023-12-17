@@ -73,6 +73,13 @@ try:
                         })
                         naively_matched_terms.append(term)
 
+            unmatched_terms = [term for term in input_terms if term not in naively_matched_terms]
+
+            if unmatched_terms:
+                # Send a notification to the client before initiating Spacy matching
+                client_socket.send("!slow matching".encode('utf-8'))
+
+
             for term in input_terms:
                 if term not in naively_matched_terms:
                     term_doc = nlp(term)
@@ -96,10 +103,11 @@ try:
             if response:
                 client_socket.send((json.dumps(response) + "\n").encode('utf-8'))
             else:
-                client_socket.send('No match found'.encode('utf-8'))
+                client_socket.send('!no match found'.encode('utf-8'))
 
             print(f"### Response Sent: {json.dumps(response)}\n")
 
 finally:
     server_socket.close()
     print("### Server Socket Closed")
+    

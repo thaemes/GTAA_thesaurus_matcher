@@ -18,7 +18,7 @@ Introducing the different files
 The actual server. It starts a socket server on the local host (127.0.0.1). If you send it a word, it will do the following: 
 
 1. Try to do a direct match (This takes a few milliseconds)
-2. If there is no direct match, it will use spacy to match it with word embeddings (this will take a few seconds)
+2. If there is no direct match, it will use spacy to match it with word embeddings (this will take a few seconds). The server will send a notification about this to the client(```!slow matching```).
 3. It returns matches to the client
 
 ### client_tester.py
