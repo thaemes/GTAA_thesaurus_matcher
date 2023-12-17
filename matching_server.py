@@ -1,53 +1,61 @@
-
 import spacy
 import csv
 import socket
 import json
+import string
 
 server_socket = socket.socket()
 host = '127.0.0.1'
 port = 12223
 server_socket.bind((host, port))
 
-similarity_threshold = 0.6 
+similarity_threshold = 0.6
 
 nlp = spacy.load("nl_core_news_lg")
 
 thesaurus_file = "open_subset_gtaas.csv"
 thesaurus = {}
 
+blocklist_file = "blocklist.txt"
+blocklist = set()
+
+# Load the blocklist
 try:
+    with open(blocklist_file, "r", encoding="utf-8") as blockfile:
+        for line in blockfile:
+            blocked_word = line.strip()
+            blocklist.add(blocked_word)
+
     with open(thesaurus_file, "r", encoding="utf-8") as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            number = (row["Subject"])  # Convert the number to an integer
+            number = row["Subject"]
             word = row["Label"]
             thesaurus[word] = number
 
     server_socket.listen()
-    print("\n### Server Started Listening on Port", port, "\n")
+    print(f"\n### Server Started Listening on Port {port}\n")
 
     while True:
         client_socket, address = server_socket.accept()
-        print("### Accepted Connection from:", address)
+        print(f"### Accepted Connection from: {address}\n")
 
         while True:
             data = client_socket.recv(1024)
             if not data:
-                print("### No Data Received. Closing Connection.")
+                print("### No Data Received. Closing Connection.\n")
                 break
 
             input_text = data.decode('utf-8')
-            print("### Received Data:", input_text)
+            input_text = ''.join(char for char in input_text if char not in string.punctuation)
+            print(f"### Received Data: {input_text}")
             response = []
 
-            # Split input text into words/terms
             input_terms = input_text.split()
-
-            # Track terms that have been naively matched
             naively_matched_terms = []
 
-            # Naive matching for the entire input and individual terms
+            input_terms = [term for term in input_terms if term not in blocklist]
+
             if input_text in thesaurus:
                 response.append({
                     "label": input_text,
@@ -65,7 +73,6 @@ try:
                         })
                         naively_matched_terms.append(term)
 
-            # Spacy matching for terms not naively matched
             for term in input_terms:
                 if term not in naively_matched_terms:
                     term_doc = nlp(term)
@@ -86,13 +93,12 @@ try:
                             "similarity_score": best_similarity
                         })
 
-            # Send the response back to the client
             if response:
-                client_socket.send( (json.dumps(response)+"\n").encode('utf-8'))
+                client_socket.send((json.dumps(response) + "\n").encode('utf-8'))
             else:
                 client_socket.send('No match found'.encode('utf-8'))
 
-            print("### Response Sent:", json.dumps(response))
+            print(f"### Response Sent: {json.dumps(response)}\n")
 
 finally:
     server_socket.close()
