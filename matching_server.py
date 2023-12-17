@@ -77,8 +77,7 @@ try:
 
             if unmatched_terms:
                 # Send a notification to the client before initiating Spacy matching
-                client_socket.send("!slow matching".encode('utf-8'))
-
+                client_socket.send("!slow matching\n".encode('utf-8'))
 
             for term in input_terms:
                 if term not in naively_matched_terms:
@@ -103,7 +102,7 @@ try:
             if response:
                 client_socket.send((json.dumps(response) + "\n").encode('utf-8'))
             else:
-                client_socket.send('!no match found'.encode('utf-8'))
+                client_socket.send('!no match found\n'.encode('utf-8'))
 
             print(f"### Response Sent: {json.dumps(response)}\n")
 
