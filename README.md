@@ -27,7 +27,9 @@ A tester program. It connects to the server and you can type to test input strin
 ### open_subset_gtaas
 A dictionary of GTAAs for the openly accessible part with video links. These are the terms that were assigned to ```sdo:about``` on clip leve. 
 
+### blocklist.txt
+List of words that will not be checked for matches. Words are separated by line. 
 
 ## TODO
-- [ ] Add SPARQL query that can be used to retreive the GTAAs for a given subset. 
+- [ ] Document SPARQL query that can be used to retreive the GTAAs for a given subset. 
 - [ ] Decide on functionality for longer sentences; should the literal matches be triggered, and return right away?
