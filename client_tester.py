@@ -2,7 +2,7 @@ import socket
 import json
 
 client_socket = socket.socket()
-host = '127.0.0.1'
+host = 'localhost'#'172.20.10.4'
 port = 12223
 
 try:
@@ -22,7 +22,7 @@ try:
         while True:
             response = client_socket.recv(1024).decode('utf-8')
 
-            if response == "!slow matching":
+            if response == "!slow matching\n":
                 print("Server is initiating slow matching. Please wait...")
             else:
                 print("Response from server:", response)

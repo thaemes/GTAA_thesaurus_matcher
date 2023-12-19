@@ -5,7 +5,7 @@ import json
 import string
 
 server_socket = socket.socket()
-host = '127.0.0.1'
+host = 'localhost' #'10.150.24.129'#'localhost'#'172.20.10.4'
 port = 12223
 server_socket.bind((host, port))
 
@@ -13,7 +13,7 @@ similarity_threshold = 0.6
 
 nlp = spacy.load("nl_core_news_lg")
 
-thesaurus_file = "open_subset_gtaas.csv"
+thesaurus_file = "open_subset_gtaas_childfriendly.csv"
 thesaurus = {}
 
 blocklist_file = "blocklist.txt"
