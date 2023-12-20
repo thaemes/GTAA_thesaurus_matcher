@@ -16,3 +16,4 @@ ja
 oke
 ok
 hum
+weer
