@@ -2,7 +2,7 @@ import socket
 import json
 
 client_socket = socket.socket()
-host = 'localhost'#'172.20.10.4'
+host = '10.150.24.63' #'10.150.25.1'#'172.20.10.4'
 port = 12223
 
 try:

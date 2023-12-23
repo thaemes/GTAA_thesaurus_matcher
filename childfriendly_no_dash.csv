@@ -35,7 +35,6 @@ Subject,Label
 29013,processies
 26446,optochten
 28025,geestelijken
-28507,defilés
 28238,herdenkingen
 27880,kransleggingen
 27760,mariniers
@@ -84,7 +83,8 @@ Subject,Label
 28286,grachten
 27155,kwekerijen
 29590,vrijlatingen
-27533,draf- en rensport
+27533,draf en rensport
+27533,draven
 29043,vrachtwagens
 26058,kerstbomen
 25295,bevrijding
@@ -434,7 +434,7 @@ Subject,Label
 26386,noodwoningen
 26523,plaggenhutten
 28356,kaas
-29797,paard-en-wagen
+29797,paard en wagen
 26021,kaasmakerijen
 26022,kaasmarkten
 25507,diamantindustrie
@@ -1113,10 +1113,10 @@ Subject,Label
 26046,kardinalen
 27341,wandtapijten
 29249,landarbeiders
-26286,midden- en kleinbedrijf
+26286,midden en kleinbedrijf
 27290,voedingsleer
 27271,vitamines
-27786,meet- en weeginstrumenten
+27786,meet en weeginstrumenten
 27798,dierproeven
 27935,ambachten
 27438,zangvogels
@@ -1257,7 +1257,7 @@ Subject,Label
 25016,boekdrukkunst
 26559,pottenbakkers
 28657,aardewerk
-25782,glas-in-lood
+25782,glas in lood
 29063,raketten
 27819,voedselhulp
 26096,koninklijke bezoeken
@@ -1340,7 +1340,7 @@ Subject,Label
 26471,overlevingstochten
 25612,emancipatie
 28687,landkaarten
-29792,meld- en regelkamers
+29792,meld en regelkamers
 29971,stankoverlast
 25692,filmoperateurs
 25691,filmmontage
@@ -1380,7 +1380,7 @@ Subject,Label
 26738,sloperijen
 29141,radiologie
 26376,nesten
-29424,consumptie-ijs
+29424,consumptie ijs
 28996,lederindustrie
 26483,parlementaire enquêtes
 25571,drukpersen
@@ -1418,7 +1418,8 @@ Subject,Label
 28183,immigratie
 30061,hindoes
 28313,geneesmiddelen
-27985,klim- en bergsport
+27985,klim en bergsport
+27985,klimmen
 26314,modeontwerpers
 26359,naaisters
 27746,moerassen
@@ -1445,7 +1446,7 @@ Subject,Label
 25874,herten
 26204,machinisten
 25467,culturele identiteit
-28675,beeld- en geluidsdragers
+28675,beeld en geluidsdragers
 28925,bridge
 29543,ruilhandel
 29354,vliegtuigpersoneel
@@ -1508,7 +1509,7 @@ Subject,Label
 28762,chirurgie
 29278,economische hulp
 25626,ereburgerschappen
-28938,schaal- en schelpdieren
+28938,schaaldieren schelpdieren
 25303,bouwkunde
 27999,bezoeken
 25503,devaluatie

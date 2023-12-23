@@ -7,7 +7,7 @@ import string
 
 def initialize_server():
     server_socket = socket.socket()
-    host = 'localhost'
+    host =  '10.150.24.63' # //'10.150.25.1'
     port = 12223
     server_socket.bind((host, port))
     server_socket.listen()
@@ -69,7 +69,7 @@ def semantic_similarity_matching(input_text, thesaurus, nlp, similarity_threshol
 def main():
     similarity_threshold = 0.6
     nlp = spacy.load("nl_core_news_lg")
-    thesaurus_file = "open_subset_gtaas_childfriendly.csv"
+    thesaurus_file = "childfriendly_no_dash.csv"
     thesaurus = load_thesaurus(thesaurus_file)
 
     # Create patterns for Matcher
