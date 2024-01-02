@@ -7,7 +7,7 @@ import string
 
 def initialize_server():
     server_socket = socket.socket()
-    host =  '10.150.24.63' # //'10.150.25.1'
+    host =  '10.150.25.107' #'10.150.24.71' # //'10.150.25.1'
     port = 12223
     server_socket.bind((host, port))
     server_socket.listen()

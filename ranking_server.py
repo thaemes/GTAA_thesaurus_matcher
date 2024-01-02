@@ -7,7 +7,7 @@ import string
 
 def initialize_server():
     server_socket = socket.socket()
-    host =  'localhost' #'10.150.24.71' # //'10.150.25.1'
+    host =  '10.150.25.107' #'10.150.24.71' # //'10.150.25.1'
     port = 12224
     server_socket.bind((host, port))
     server_socket.listen()
@@ -42,7 +42,6 @@ def compute_similarities(main_keyword, other_keywords, nlp):
             "similarity_score": similarity
         })
     return sorted(results, key=lambda x: x["similarity_score"], reverse=True)
-
 def main():
     nlp = spacy.load("nl_core_news_lg")
     thesaurus_file = "childfriendly_no_dash.csv"
@@ -54,23 +53,35 @@ def main():
             client_socket, address = server_socket.accept()
             print(f"### Accepted Connection from: {address}\n")
 
+            data_buffer = ""
             while True:
-                data = client_socket.recv(8192)
+                data = client_socket.recv(16384)
                 if not data:
                     print("### Null Data Received. Closing Connection.\n")
                     break
-                print(data)
-                data = json.loads(data.decode('utf-8'))
-                main_keyword = data["main_keyword"]
-                other_keywords = data["other_keywords"]
+                data_buffer += data.decode('utf-8')
 
-                response = compute_similarities(main_keyword, other_keywords, nlp)
-                client_socket.send((json.dumps(response) + "\n").encode('utf-8'))
-                print(f"\n### Response Sent: {json.dumps(response)}\n")
+                try:
+                    # Try to parse the accumulated data
+                    parsed_data = json.loads(data_buffer)
+
+                    # If successful, process the request
+                    main_keyword = parsed_data["main_keyword"]
+                    other_keywords = parsed_data["other_keywords"]
+                    response = compute_similarities(main_keyword, other_keywords, nlp)
+                    print(response)
+                    client_socket.send((json.dumps(response) + "\n").encode('utf-8'))
+
+                    # Clear the buffer for the next message
+                    data_buffer = ""
+                except json.JSONDecodeError:
+                    # If JSON is incomplete, continue accumulating data
+                    continue
 
     finally:
         server_socket.close()
         print("### Server Socket Closed")
+
 
 if __name__ == "__main__":
     main()
